@@ -1,0 +1,126 @@
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+
+const NotesList = () => {
+  const [notes, setNotes] = useState([]);
+  const [editingId, setEditingId] = useState(null);
+  const [editText, setEditText] = useState("");
+
+  const fetchNotes = async () => {
+    const res = await fetch("http://localhost:5000/notes");
+    const data = await res.json();
+    if (res.ok) setNotes(data.data);
+  };
+
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Delete this note?")) return;
+
+    const res = await fetch(`http://localhost:5000/notes/${id}`, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      toast.success("Note deleted");
+      fetchNotes();
+    } else {
+      toast.error("Delete failed");
+    }
+  };
+
+  const startEdit = (note) => {
+    setEditingId(note._id);
+    setEditText(note.notes);
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditText("");
+  };
+
+  const saveEdit = async (id) => {
+    const res = await fetch(`http://localhost:5000/notes/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ notes: editText }),
+    });
+
+    if (res.ok) {
+      toast.success("Note updated");
+      setEditingId(null);
+      fetchNotes();
+    } else {
+      toast.error("Update failed");
+    }
+  };
+
+  return (
+    <div className="min-h-screen w-full bg-linear-to-br from-slate-950 via-indigo-950 to-slate-900 text-white">
+      <div className="max-w-6xl mx-auto px-6 py-8">
+        <h1 className="text-3xl font-bold mb-8">📒 Your Notes</h1>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {notes.map((note) => (
+            <div
+              key={note._id}
+              className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl p-5 shadow-xl"
+            >
+              {editingId === note._id ? (
+                <>
+                  <textarea
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                    className="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white"
+                  />
+
+                  <div className="flex gap-2 mt-4">
+                    <button
+                      onClick={() => saveEdit(note._id)}
+                      className="flex-1 bg-green-600 hover:bg-green-500 py-2 rounded-lg text-sm"
+                    >
+                      Save
+                    </button>
+
+                    <button
+                      onClick={cancelEdit}
+                      className="flex-1 bg-white/10 hover:bg-white/20 py-2 rounded-lg text-sm"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="text-lg text-gray-100 leading-relaxed">
+                    {note.notes}
+                  </p>
+
+                  <div className="mt-6 flex gap-2">
+                    <button
+                      onClick={() => startEdit(note)}
+                      className="flex-1 bg-indigo-600 hover:bg-indigo-500 py-2 rounded-lg text-sm"
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      onClick={() => handleDelete(note._id)}
+                      className="flex-1 bg-red-600 hover:bg-red-500 py-2 rounded-lg text-sm"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default NotesList;
