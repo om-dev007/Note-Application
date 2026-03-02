@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const NotesList = () => {
   const [notes, setNotes] = useState([]);
@@ -70,12 +71,7 @@ const NotesList = () => {
         {notes.length === 0 ? (
           <div className="flex flex-col items-center justify-center text-center py-24 text-gray-400">
             <p className="text-lg mb-4">No notes yet</p>
-            <button
-              onClick={() => window.location.href = "/"}
-              className="bg-indigo-600 cursor-pointer hover:bg-indigo-500 px-5 py-2 rounded-lg text-sm font-medium"
-            >
-              Add your first note
-            </button>
+            <Link className="bg-indigo-600 cursor-pointer hover:bg-indigo-500 px-5 py-2 rounded-lg text-sm font-medium" to="/">Add your first note</Link>
           </div>
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
