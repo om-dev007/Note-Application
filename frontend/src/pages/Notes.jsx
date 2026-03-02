@@ -76,7 +76,7 @@ const Notes = () => {
 
           <button
             type="submit"
-            className="w-full mt-5 bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] transition py-3 rounded-lg font-medium shadow-lg"
+            className="w-full mt-5 cursor-pointer bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] transition py-3 rounded-lg font-medium shadow-lg"
           >
             Save Note
           </button>
