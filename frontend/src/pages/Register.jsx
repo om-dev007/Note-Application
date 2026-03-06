@@ -66,7 +66,7 @@ const Register = () => {
         className="w-full mb-4 px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-sm sm:text-base"
         />
 
-        <button className="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-lg text-sm sm:text-base">
+        <button className="w-full cursor-pointer bg-indigo-600 hover:bg-indigo-500 py-3 rounded-lg text-sm sm:text-base">
           Register
         </button>
 
