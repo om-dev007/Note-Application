@@ -5,7 +5,10 @@ import cookieParser from 'cookie-parser'
 import userRoutes from "./routes/auth.routes.js";
 
 const app = e();
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
 app.use(e.json());
 app.use(cookieParser())
 app.use("/notes", router);
