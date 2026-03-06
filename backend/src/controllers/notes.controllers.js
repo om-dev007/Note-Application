@@ -9,7 +9,7 @@ export const createNotes = async (req, res) => {
     });
   }
 
-  const data = await dbModel.create({ notes });
+  const data = await dbModel.create({ notes, user: req.userId });
 
   return res.status(201).json({
     message: "Notes created successfully",
@@ -18,7 +18,9 @@ export const createNotes = async (req, res) => {
 };
 
 export const getNotes = async (req, res) => {
-  const data = await dbModel.find();
+  const data = await dbModel.find({
+    user: req.userId
+  });
 
   if (data.length <= 0) {
     return res.status(404).json({
@@ -35,7 +37,7 @@ export const getNotes = async (req, res) => {
 export const updateNote = async (req, res) => {
   try {
     const { id } = req.params;
-    const {notes} = req.body
+    const { notes } = req.body
     const updateNotes = await dbModel.findByIdAndUpdate(
       id,
       { notes: notes },
