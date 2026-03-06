@@ -6,7 +6,7 @@ import userRoutes from "./routes/auth.routes.js";
 
 const app = e();
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://note-application-dusky.vercel.app/",
     credentials: true
 }));
 app.use(e.json());
