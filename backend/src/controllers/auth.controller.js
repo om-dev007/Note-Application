@@ -80,7 +80,7 @@ export const loginUser = async (req, res) => {
         })
     }
 
-    const checkPassword = bcrypt.compare(password, user.password)
+    const checkPassword = await bcrypt.compare(password, user.password)
 
     if(!checkPassword) {
         return res.status(401).json({
@@ -103,6 +103,11 @@ export const loginUser = async (req, res) => {
         }
     })
 
+}
 
-
+export const logoutUser = async (req, res) => {
+    res.clearCookie("token")
+    return res.status(200).json({
+        message: "Logged out successfully"
+    })
 }
