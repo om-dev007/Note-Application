@@ -14,7 +14,7 @@ const CreateNote = () => {
 
         e.preventDefault();
 
-        if(!note.trim()){
+        if (!note.trim()) {
             return toast.error("Please write a note");
         }
 
@@ -27,9 +27,18 @@ const CreateNote = () => {
             setNote("");
 
         }
-        catch {
+        catch (err) {
+            if (err.response && err.response.status === 401) {
 
-            toast.error("Error creating note");
+                toast.error("Please login first");
+
+                navigate("/login");
+
+            } else {
+
+                toast.error("Failed to create notes");
+
+            }
 
         }
 
@@ -81,7 +90,7 @@ const CreateNote = () => {
         </div>
 
     );
- 
+
 };
 
 export default CreateNote;
