@@ -97,8 +97,8 @@ export const loginUser = async (req, res) => {
     res.cookie("token", token, {
         httpOnly: true,
         secure: true,
-        sameSite: "none"
-    })
+        sameSite: "none",
+    });
 
     return res.status(200).json({
         message: "Logged in successfully",
@@ -110,7 +110,12 @@ export const loginUser = async (req, res) => {
 };
 
 export const logoutUser = async (req, res) => {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+    });
+
     return res.status(200).json({
         message: "Logged out successfully",
     });
