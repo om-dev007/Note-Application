@@ -1,43 +1,90 @@
-# 🎨 Notes App Frontend
+# Frontend - Notes Application
 
-React application for personal notes management with a modern responsive UI.
-Authentication flow is currently **in progress** and will be integrated soon.
+This is the frontend of the Notes Application built using React + Vite + Tailwind CSS.
 
-## Features
+⚠️ This project is created only for learning purposes.
 
-* Notes dashboard
-* Create note
-* Edit note
-* Delete note
-* Empty state UX
-* Timestamps display
-* Toast notifications
-* Responsive design
-* Authentication UI (planned)
+---
 
-## Tech Stack
+## 🌐 Live Website
 
-* React
-* React Router
-* Tailwind CSS
-* Axios / Fetch
-* React Hot Toast
+https://note-application-dusky.vercel.app/
 
-## Pages
+---
 
-* /notes
-* /add-note
-* /login (planned)
-* /register (planned)
+## 🚀 Features
 
-## Behavior
+- User Login & Register
+- Protected Pages
+- Create Notes
+- Edit Notes
+- Delete Notes
+- Responsive UI
+- Toast Notifications
 
-* Real-time delete update
-* Empty state with add-note CTA
-* Authentication protection (planned)
+---
 
-## Setup
+## 🛠 Technologies Used
 
-1. Install dependencies
-2. Set backend API URL
-3. Start dev server
+- React
+- Vite
+- Tailwind CSS
+- React Router
+- Axios
+- React Hot Toast
+
+---
+
+## 📁 Folder Structure
+
+frontend  
+│  
+├── components  
+│  
+├── pages  
+│   ├── Home.jsx  
+│   ├── Login.jsx  
+│   ├── Register.jsx  
+│   ├── NotesList.jsx  
+│   └── CreateNote.jsx  
+│  
+├── utils  
+│   └── axios.js  
+│  
+├── App.jsx  
+└── main.jsx  
+
+---
+
+## ⚙️ Installation
+
+Install dependencies
+
+npm install
+
+Run development server
+
+npm run dev
+
+App will run on
+
+http://localhost:5173
+
+---
+
+## 🔗 Backend API
+
+Frontend communicates with the backend deployed on Render using Axios.
+
+Example configuration:
+
+axios.create({
+  baseURL: backend_url,
+  withCredentials: true
+})
+
+---
+
+## ⚠️ Note
+
+This project is built for learning full-stack development with React.
